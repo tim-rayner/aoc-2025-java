@@ -1,4 +1,4 @@
-# 🎄 Advent of Code 2025 — Java Solutions
+# 🎄 Advent of Code 2025 — Java Edition
 
 Each December, Advent of Code releases a series of programming challenges designed to sharpen problem-solving skills and stretch your thinking. This year introduces a 12-day format, and I’m using it as a focused opportunity to strengthen my Java fundamentals.
 
