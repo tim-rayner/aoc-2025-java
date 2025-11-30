@@ -25,6 +25,12 @@ This is intended to be both a record of progress and a reusable learning referen
 
 ---
 
+## 📅 Schedule & Availability
+
+I will be taking annual leave from **13th–20th December** and will be abroad during this period. I'll keep up with the challenges where possible, and will fill in any gaps in the later days when I return.
+
+---
+
 ## 🏗️ Project Structure
 
 The repository follows a consistent, scalable layout:
