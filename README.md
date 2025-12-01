@@ -60,10 +60,11 @@ src/
 Each day has a class named `DayXX` (e.g., `Day01`, `Day02`), and each implements:
 
 ```java
-public abstract String solution() throws Exception;
+public abstract String challenge1() throws Exception;
+public abstract String challenge2() throws Exception;
 ```
 
-Most AoC puzzles are split into Part 1 and Part 2, but if 2025 keeps the single-answer format from last year, this method becomes even clearer to work with.
+Each AoC puzzle is split into Part 1 and Part 2, so each day class implements both challenge methods separately.
 
 ---
 
@@ -91,7 +92,7 @@ The samples are valuable because they let you write assertions based on the expe
 
 Each day includes a minimal JUnit test file to ensure:
 
-- The solution method runs
+- Both challenge methods run
 - The class loads correctly
 - Logic can be validated using sample inputs
 
@@ -104,12 +105,17 @@ As the challenge progresses, these tests can be expanded with concrete expected 
 Via the CLI runner:
 
 ```bash
-mvn -q exec:java \\
-  -Dexec.mainClass=com.timrayner.aoc2025.App \\
+mvn -q exec:java \
+  -Dexec.mainClass=com.timrayner.aoc2025.App \
   -Dexec.args="01"
 ```
 
-This executes `Day01` and prints the final answer.
+This executes `Day01` and prints both challenge results:
+
+```
+Day 01 Challenge 1: <answer>
+Day 01 Challenge 2: <answer>
+```
 
 ---
 

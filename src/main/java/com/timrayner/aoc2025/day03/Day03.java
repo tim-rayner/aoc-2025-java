@@ -6,8 +6,14 @@ public class Day03 extends DayTemplate {
 
     private static final String INPUT = "day03.txt";
 
-    @Override   
-    public String solution() throws Exception {
+    @Override
+    public String challenge1() throws Exception {
+        var lines = readInput(INPUT);
+        return "NOT IMPLEMENTED 🎅🏼";
+    }
+
+    @Override
+    public String challenge2() throws Exception {
         var lines = readInput(INPUT);
         return "NOT IMPLEMENTED 🎅🏼";
     }

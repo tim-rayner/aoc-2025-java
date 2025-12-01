@@ -6,9 +6,15 @@ import org.junit.jupiter.api.Test;
 class Day05Test {
 
     @Test
-    void testSolution() throws Exception {
+    void testChallenge1() throws Exception {
         var day = new Day05();
-        assertNotNull(day.solution());
+        assertNotNull(day.challenge1());
+    }
+
+    @Test
+    void testChallenge2() throws Exception {
+        var day = new Day05();
+        assertNotNull(day.challenge2());
     }
 
    

@@ -17,7 +17,9 @@ public class App {
 
         DayTemplate solver = (DayTemplate) ctor.newInstance();
 
-        String answer = solver.solution();
-        System.out.println("Day " + day + " Solution: " + answer);
+        String answer1 = solver.challenge1();
+        String answer2 = solver.challenge2();
+        System.out.println("Day " + day + " Challenge 1: " + answer1);
+        System.out.println("Day " + day + " Challenge 2: " + answer2);
     }
 }
