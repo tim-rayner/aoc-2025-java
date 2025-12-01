@@ -1,13 +1,18 @@
 package com.timrayner.aoc2025.day01;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.List;
+import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import com.timrayner.aoc2025.DayTemplate;
 
 public class Day01 extends DayTemplate {
-
+    static int sumOf0 = 0;
+    static int zeroCount = 0;
+    
     public record Instruction(char direction, int amount) {}
 
     @Override
@@ -35,31 +40,46 @@ public class Day01 extends DayTemplate {
         return Integer.toString(counter);
     }
 
+    /**
+     * @ENHANCE: challenge 2 actually solves both challenges, using a slightly different approach... however I've kept my first answer above to document my learning process/progress
+     */
     @Override
     public String challenge2() throws Exception {
-        List<String> directions = readInput("/sample/day01Sample.txt");
 
-        int counter = 0;  
-        int cycles = 0;
-        int currentPosition = 50;
+        try {
+            File input = new File("src/main/resources/inputs/day01.txt");        
+            Scanner scanner = new Scanner(input);
+            int dial = 50;
+    
+            System.out.println("The dial starts by pointing at " + dial);
+    
+            while (scanner.hasNextLine()) {
+                String line = scanner.nextLine().trim();
+                char direction = line.charAt(0);
+                int num = reduce(Integer.parseInt(line.substring(1)));
 
+                if (direction == 'R') {
+                    dial = rotateRight(dial, num);
+                } else {
+                    dial = rotateLeft(dial, num);
+                }
+               
+                if (dial == 0) {
+                    zeroCount++;
+                }
+            }    
+            System.out.println(zeroCount);
+            System.out.println(sumOf0);
 
-        for(int i = 0; i < directions.size(); i++){
-
-            String instruction = directions.get(i);
-
-            Instruction decodedInstruction = getInstruction(instruction);
-            cycles += getCyclesPastZero(decodedInstruction, currentPosition);
-            
-            currentPosition = rotate(decodedInstruction, currentPosition);
-
-            if(currentPosition == 0){
-                counter++;
-            } 
-
+            scanner.close();
+        } 
+        catch (FileNotFoundException e) {
+            System.out.println("Error! File not found!");
         }
-   
-        return Integer.toString(cycles + counter);    }
+       
+
+        return Integer.toString(sumOf0);
+     }
 
 
     // Private Methods
@@ -93,43 +113,39 @@ public class Day01 extends DayTemplate {
         return new Instruction(dir, amount);
     }
 
-    private int getCyclesPastZero(Instruction instruction, int currentPosition){
-
-        int instructionAmount = instruction.amount; 
-        int max = 100; 
-        int min = 0; 
-        int zcount = 0;
 
 
-        if(instruction.direction == 'R'){
-            if (currentPosition != 0 && (currentPosition + instructionAmount) > max) {
-           
-                zcount = zcount + 1;
-                int diff = (currentPosition + instructionAmount) - max;
-                boolean multipleLoops = diff >= max;
-                if(multipleLoops){
-                    zcount = zcount + ((diff / max) / 100);
-                }
-                return zcount;
-            }
+
+    public static int rotateRight(int currentPosition, int rotation) {
+        int next = currentPosition + rotation;
+        if (next > 99) {
+            sumOf0++;
+            return next - 100;
         }
-        else {
-            if((currentPosition != 0 && (currentPosition - instructionAmount) < min)){
-                zcount = zcount + 1;
-                int diff = min - (currentPosition - instructionAmount);
-                boolean multipleLoops = diff >= max;
-                if(multipleLoops){
-                    zcount = zcount + ((diff / max) / 100);
-                }
-                return zcount;
-            }
-        }
+        return next;
+    }
 
-        return zcount;
+    public static int rotateLeft(int currentPosition, int rotation) {
+
+        int next = currentPosition - rotation;
+        if (next < 0) {
+            if (currentPosition != 0) {
+                sumOf0++;
+            }
+            return 100 + next;
+        }
+        if (next == 0) {
+            sumOf0++;
+        }
+        return next;
 
     }
 
-
+    private int reduce(int amount) {
+        int hundreds = amount / 100;
+        sumOf0 += hundreds;
+        return amount - 100 * hundreds;
+    }
 }
 
 
