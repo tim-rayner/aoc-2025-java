@@ -19,10 +19,11 @@ class Day01Test {
     }
 
     @Test
+    @DisplayName("Challenge 2 ")
     void testChallenge2() throws Exception {
-        var day = new Day01();
-        var result = day.challenge2();
+        var result = day.challenge1();
         assertNotNull(result);
+        assertEquals("6", result);
     }
 
 }

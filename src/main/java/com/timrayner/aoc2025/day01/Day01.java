@@ -37,9 +37,29 @@ public class Day01 extends DayTemplate {
 
     @Override
     public String challenge2() throws Exception {
-        var lines = readInput("/sample/day01Sample.txt");
-        return "NOT IMPLEMENTED 🎅🏼";
-    }
+        List<String> directions = readInput("/sample/day01Sample.txt");
+
+        int counter = 0;  
+        int cycles = 0;
+        int currentPosition = 50;
+
+
+        for(int i = 0; i < directions.size(); i++){
+
+            String instruction = directions.get(i);
+
+            Instruction decodedInstruction = getInstruction(instruction);
+            cycles += getCyclesPastZero(decodedInstruction, currentPosition);
+            
+            currentPosition = rotate(decodedInstruction, currentPosition);
+
+            if(currentPosition == 0){
+                counter++;
+            } 
+
+        }
+   
+        return Integer.toString(cycles + counter);    }
 
 
     // Private Methods
@@ -59,6 +79,8 @@ public class Day01 extends DayTemplate {
         return newVal;
     }
 
+    
+
     private Instruction getInstruction(String direction){
         Matcher m = Pattern.compile("([LR])(\\d+)").matcher(direction);
         if (!m.matches()){
@@ -71,6 +93,41 @@ public class Day01 extends DayTemplate {
         return new Instruction(dir, amount);
     }
 
+    private int getCyclesPastZero(Instruction instruction, int currentPosition){
+
+        int instructionAmount = instruction.amount; 
+        int max = 100; 
+        int min = 0; 
+        int zcount = 0;
+
+
+        if(instruction.direction == 'R'){
+            if (currentPosition != 0 && (currentPosition + instructionAmount) > max) {
+           
+                zcount = zcount + 1;
+                int diff = (currentPosition + instructionAmount) - max;
+                boolean multipleLoops = diff >= max;
+                if(multipleLoops){
+                    zcount = zcount + ((diff / max) / 100);
+                }
+                return zcount;
+            }
+        }
+        else {
+            if((currentPosition != 0 && (currentPosition - instructionAmount) < min)){
+                zcount = zcount + 1;
+                int diff = min - (currentPosition - instructionAmount);
+                boolean multipleLoops = diff >= max;
+                if(multipleLoops){
+                    zcount = zcount + ((diff / max) / 100);
+                }
+                return zcount;
+            }
+        }
+
+        return zcount;
+
+    }
 
 
 }
