@@ -15,7 +15,7 @@ class Day01Test {
     void testChallenge1() throws Exception {
         var result = day.challenge1();
         assertNotNull(result);
-        assertEquals(3, result);
+        assertEquals("1029", result);
     }
 
     @Test

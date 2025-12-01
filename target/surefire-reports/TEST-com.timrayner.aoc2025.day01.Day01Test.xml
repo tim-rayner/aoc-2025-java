@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.timrayner.aoc2025.day01.Day01Test" time="0.019" tests="1" errors="0" skipped="0" failures="1">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.timrayner.aoc2025.day01.Day01Test" time="0.029" tests="1" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="21"/>
     <property name="sun.jnu.encoding" value="UTF-8"/>
@@ -12,7 +12,7 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="user.country" value="GB"/>
     <property name="sun.boot.library.path" value="/opt/homebrew/Cellar/openjdk@21/21.0.8/libexec/openjdk.jdk/Contents/Home/lib"/>
-    <property name="sun.java.command" value="/Users/timr/repos/personal-projects/aoc-2025-java/target/surefire/surefirebooter-20251201085536299_3.jar /Users/timr/repos/personal-projects/aoc-2025-java/target/surefire 2025-12-01T08-55-36_248-jvmRun1 surefire-20251201085536299_1tmp surefire_0-20251201085536299_2tmp"/>
+    <property name="sun.java.command" value="/Users/timr/repos/personal-projects/aoc-2025-java/target/surefire/surefirebooter-20251201161800624_3.jar /Users/timr/repos/personal-projects/aoc-2025-java/target/surefire 2025-12-01T16-18-00_592-jvmRun1 surefire-20251201161800624_1tmp surefire_0-20251201161800624_2tmp"/>
     <property name="http.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
     <property name="jdk.debug" value="release"/>
     <property name="test" value="Day01Test#testChallenge1"/>
@@ -30,7 +30,7 @@
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
     <property name="apple.awt.application.name" value="ForkedBooter"/>
-    <property name="surefire.real.class.path" value="/Users/timr/repos/personal-projects/aoc-2025-java/target/surefire/surefirebooter-20251201085536299_3.jar"/>
+    <property name="surefire.real.class.path" value="/Users/timr/repos/personal-projects/aoc-2025-java/target/surefire/surefirebooter-20251201161800624_3.jar"/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="ftp.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
     <property name="java.runtime.version" value="21.0.8"/>
@@ -59,20 +59,5 @@
     <property name="socksNonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
     <property name="java.class.version" value="65.0"/>
   </properties>
-  <testcase name="testChallenge1" classname="com.timrayner.aoc2025.day01.Day01Test" time="0.012">
-    <failure message="expected: &lt;3&gt; but was: &lt;NOT IMPLEMENTED 🎅🏼&gt;" type="org.opentest4j.AssertionFailedError"><![CDATA[org.opentest4j.AssertionFailedError: expected: <3> but was: <NOT IMPLEMENTED 🎅🏼>
-	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
-	at org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
-	at org.junit.jupiter.api.AssertEquals.failNotEqual(AssertEquals.java:197)
-	at org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:182)
-	at org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:177)
-	at org.junit.jupiter.api.Assertions.assertEquals(Assertions.java:1141)
-	at com.timrayner.aoc2025.day01.Day01Test.testChallenge1(Day01Test.java:18)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
-	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
-	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
-]]></failure>
-    <system-out><![CDATA[directions: L68
-]]></system-out>
-  </testcase>
+  <testcase name="testChallenge1" classname="com.timrayner.aoc2025.day01.Day01Test" time="0.022"/>
 </testsuite>
