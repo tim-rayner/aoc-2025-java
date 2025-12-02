@@ -99,8 +99,6 @@ public class Day01 extends DayTemplate {
         return newVal;
     }
 
-    
-
     private Instruction getInstruction(String direction){
         Matcher m = Pattern.compile("([LR])(\\d+)").matcher(direction);
         if (!m.matches()){
@@ -113,10 +111,7 @@ public class Day01 extends DayTemplate {
         return new Instruction(dir, amount);
     }
 
-
-
-
-    public static int rotateRight(int currentPosition, int rotation) {
+    private static int rotateRight(int currentPosition, int rotation) {
         int next = currentPosition + rotation;
         if (next > 99) {
             sumOf0++;
@@ -125,7 +120,7 @@ public class Day01 extends DayTemplate {
         return next;
     }
 
-    public static int rotateLeft(int currentPosition, int rotation) {
+    private static int rotateLeft(int currentPosition, int rotation) {
 
         int next = currentPosition - rotation;
         if (next < 0) {
