@@ -13,18 +13,37 @@ public abstract class DayTemplate {
         String resourcePath = path.startsWith("/") ? path.substring(1) : path;
         
         if (!resourcePath.contains("/")) {
-            resourcePath = "inputs/" + resourcePath;
-        }
-        
-        try (InputStream inputStream = getClass().getClassLoader().getResourceAsStream(resourcePath)) {
+            // Try inputs/ first, then sample/
+            String inputsPath = "inputs/" + resourcePath;
+            String samplePath = "sample/" + resourcePath;
+            
+            InputStream inputStream = getClass().getClassLoader().getResourceAsStream(inputsPath);
             if (inputStream == null) {
-                throw new IOException("Resource not found: " + resourcePath);
+                inputStream = getClass().getClassLoader().getResourceAsStream(samplePath);
+                if (inputStream == null) {
+                    throw new IOException("Resource not found in inputs/ or sample/: " + resourcePath);
+                }
             }
             
-            try (Stream<String> lines = new java.io.BufferedReader(
-                    new java.io.InputStreamReader(inputStream, StandardCharsets.UTF_8))
-                    .lines()) {
-                return lines.collect(Collectors.toList());
+            try (InputStream stream = inputStream) {
+                try (Stream<String> lines = new java.io.BufferedReader(
+                        new java.io.InputStreamReader(stream, StandardCharsets.UTF_8))
+                        .lines()) {
+                    return lines.collect(Collectors.toList());
+                }
+            }
+        } else {
+            // Path already contains directory, use as-is
+            try (InputStream inputStream = getClass().getClassLoader().getResourceAsStream(resourcePath)) {
+                if (inputStream == null) {
+                    throw new IOException("Resource not found: " + resourcePath);
+                }
+                
+                try (Stream<String> lines = new java.io.BufferedReader(
+                        new java.io.InputStreamReader(inputStream, StandardCharsets.UTF_8))
+                        .lines()) {
+                    return lines.collect(Collectors.toList());
+                }
             }
         }
     }
