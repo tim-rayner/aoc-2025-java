@@ -10,12 +10,6 @@ import com.timrayner.aoc2025.DayTemplate;
 
 public class Day03 extends DayTemplate {
 
-    /**
-     * ⛔ Learning the hard way ⛔
-     * Today I got so carried away trying to solve problem 1 in a extendible way that i ended up confusing myself and not even fully grasping task 1. this led to hours lost and lots of 
-     * frustration... annoying, but its my first AoC and i'm aware some mistakes will be made first time around. Instead of solving part 2 with ai; i've left it as i'm currently flagging at 23:59. 
-     */
-
     @Override
     public String challenge1() throws Exception {
 
@@ -38,30 +32,29 @@ public class Day03 extends DayTemplate {
                     List<Integer> newArr;
 
 
-                if(largestIndex >= bank.size() - 1){
-                    //split list before index
-                    newArr = bank.subList(0, bank.size() - 1);
+                    if(largestIndex >= bank.size() - 1){
+                        //split list before index
+                        newArr = bank.subList(0, bank.size() - 1);
                     
-                }
-                else {
-                    //split list after index
-                    newArr = bank.subList(largestIndex + 1, bank.size());
-                }
+                    }
+                    else {
+                        //split list after index
+                        newArr = bank.subList(largestIndex + 1, bank.size());
+                    }
        
-                //get largest number in array
+                    //get largest number in array
 
-                int secondLargest = getLargest(newArr);
-                String resultNumber; 
+                    int secondLargest = getLargest(newArr);
+                    String resultNumber; 
 
-                if(largestNum == bank.get(bank.size() - 1)) {
-                    resultNumber = Integer.toString(secondLargest) + Integer.toString(largestNum);
-                }
-                else {
-                    resultNumber = Integer.toString(largestNum) + Integer.toString(secondLargest);
-                }
-                //add number to total
-                largestNums.add(Integer.parseInt(resultNumber));
-
+                    if(largestNum == bank.get(bank.size() - 1)) {
+                        resultNumber = Integer.toString(secondLargest) + Integer.toString(largestNum);
+                    }
+                    else {
+                        resultNumber = Integer.toString(largestNum) + Integer.toString(secondLargest);
+                    }
+                    //add number to total
+                    largestNums.add(Integer.parseInt(resultNumber));
                 }
             }
             
@@ -84,7 +77,27 @@ public class Day03 extends DayTemplate {
 
     @Override
     public String challenge2() throws Exception {
-        return "NOT IMPLEMENTED - Straight on the naughty list ☹️🎅🏼";
+
+        long counter = 0;
+        try {
+
+            File input = new File("src/main/resources/inputs/day03.txt");
+            try (Scanner johnnyFive = new Scanner(input)) {  // nobody scans chunks of text like J5 🤖
+
+                while(johnnyFive.hasNextLine()){
+
+                    String line = johnnyFive.nextLine().trim();
+                    counter += findMaximumJoltage(line);
+
+                }
+            }
+
+        }
+        catch (FileNotFoundException e) {
+            System.out.println("Error! File not found!");
+        }
+        
+        return Long.toString(counter);
     } 
 
     private static List<Integer> getBank(String input){
@@ -114,7 +127,47 @@ public class Day03 extends DayTemplate {
         return max; 
 
     } 
-        
+
+    private static int eliminateBattery(List<Integer> batteries) {
+        for (int n = 0; n < batteries.size(); n++) {
+            int i = batteries.get(n);
+
+            if (n + 1 == batteries.size()) {
+                return n;
+            }
+    
+            else if (i < batteries.get(n + 1)) {
+                return n;
+            }
+        }
+        return batteries.size() - 1; 
+    }
+    
+    private static long findMaximumJoltage(String bank) {
+        List<Integer> batteries = new ArrayList<>();
+
+        // Convert each character into an integer like Python list comprehension
+        for (char c : bank.toCharArray()) {
+            batteries.add(Character.getNumericValue(c));
+        }
+
+        // Reduce battery list until size = 12
+        while (batteries.size() > 12) {
+            int removeIndex = eliminateBattery(batteries);
+            batteries.remove(removeIndex);
+        }
+
+        // Build output number
+        StringBuilder sb = new StringBuilder();
+        for (int n : batteries) {
+            sb.append(n);
+        }
+        long output = Long.parseLong(sb.toString());
+
+        System.out.println(output);
+        return output;
+    }
+
 
 
 
