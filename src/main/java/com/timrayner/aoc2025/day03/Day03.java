@@ -11,7 +11,7 @@ import com.timrayner.aoc2025.DayTemplate;
 public class Day03 extends DayTemplate {
 
     /**
-     * Learning the hard way 
+     * ⛔ Learning the hard way ⛔
      * Today I got so carried away trying to solve problem 1 in a extendible way that i ended up confusing myself and not even fully grasping task 1. this led to hours lost and lots of 
      * frustration... annoying, but its my first AoC and i'm aware some mistakes will be made first time around. Instead of solving part 2 with ai; i've left it as i'm currently flagging at 23:59. 
      */
@@ -84,8 +84,8 @@ public class Day03 extends DayTemplate {
 
     @Override
     public String challenge2() throws Exception {
-        return "NOT IMPLEMENTED 🎅🏼";
-    }
+        return "NOT IMPLEMENTED - Straight on the naughty list ☹️🎅🏼";
+    } 
 
     private static List<Integer> getBank(String input){
         // convert string to integer array
