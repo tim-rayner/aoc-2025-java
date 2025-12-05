@@ -60,7 +60,31 @@ public class Day05 extends DayTemplate {
     @Override
     public String challenge2() throws Exception {
         var lines = readInput(INPUT);
-        return "NOT IMPLEMENTED 🎅🏼";
+
+        List<String> freshIdRanges = new ArrayList<String>();
+
+        int gapIndex = lines.indexOf("");    // find the line break 
+        freshIdRanges = lines.subList(0, gapIndex);
+
+        List<Range> ranges = new ArrayList<>();
+        for(int i = 0; i < freshIdRanges.size(); i++){
+            Range range = parseRange(freshIdRanges.get(i));
+            ranges.add(range);
+        }
+    
+        // Sort by start value
+        ranges.sort((a, b) -> Long.compare(a.start, b.start));
+    
+        // Merge overlapping ranges
+        List<Range> merged = mergeRanges(ranges);
+    
+        // Sum the sizes of all merged ranges
+        long totalCount = 0;
+        for(Range range : merged) {
+            totalCount += (range.end - range.start + 1);
+        }
+    
+        return Long.toString(totalCount);
     }
 
 
@@ -74,6 +98,49 @@ public class Day05 extends DayTemplate {
         boolean isInRange = (inputNumber >= start) && (inputNumber <= end);
 
         return isInRange;
+    }
+ 
+
+    private Range parseRange(String rangeAsStr) {
+        int splitAt = rangeAsStr.indexOf("-");
+        long start = Long.parseLong(rangeAsStr.substring(0, splitAt)); 
+        long end = Long.parseLong(rangeAsStr.substring(splitAt + 1, rangeAsStr.length()));
+        return new Range(start, end);
+    }
+
+    private List<Range> mergeRanges(List<Range> ranges) {
+        if(ranges.isEmpty()) {
+            return new ArrayList<>();
+        }
+    
+        List<Range> merged = new ArrayList<>();
+        Range current = ranges.get(0);
+    
+        for(int i = 1; i < ranges.size(); i++) {
+            Range next = ranges.get(i);
+            
+            if(next.start <= current.end + 1) {
+                current = new Range(current.start, Math.max(current.end, next.end));
+            } else {
+                // No overlap, add current and move to next
+                merged.add(current);
+                current = next;
+            }
+        }
+        merged.add(current); // Add the last range
+    
+        return merged;
+    }
+    
+
+    private static class Range {
+        final long start;
+        final long end;
+        
+        Range(long start, long end) {
+            this.start = start;
+            this.end = end;
+        }
     }
 
 }
