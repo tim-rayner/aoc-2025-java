@@ -13,8 +13,8 @@ public class Day05 extends DayTemplate {
     public String challenge1() throws Exception {
 
         int freshCount = 0; 
-        List<String> freshIdRanges = new ArrayList<String>();
-        List<Long> ingredientIds = new ArrayList<Long>();
+        List<String> freshIdRanges;
+        List<Long> ingredientIds = new ArrayList<>();
 
 
         var lines = readInput(INPUT);
@@ -39,11 +39,11 @@ public class Day05 extends DayTemplate {
         List<String> rawIngredientIds = lines.subList(gapIndex + 1, lines.size());
 
         for(int i = 0; i < rawIngredientIds.size(); i++){
-            ingredientIds.add(Long.parseLong(rawIngredientIds.get(i)));
+            ingredientIds.add(Long.valueOf(rawIngredientIds.get(i)));
         }
         
         for(int i = 0; i < ingredientIds.size(); i++){
-            boolean fresh = false;
+            boolean fresh;
             Long ingredientId = ingredientIds.get(i);
 
             for(int f = 0; f < freshIdRanges.size(); f++){
@@ -61,7 +61,7 @@ public class Day05 extends DayTemplate {
     public String challenge2() throws Exception {
         var lines = readInput(INPUT);
 
-        List<String> freshIdRanges = new ArrayList<String>();
+        List<String> freshIdRanges;
 
         int gapIndex = lines.indexOf("");    // find the line break 
         freshIdRanges = lines.subList(0, gapIndex);
@@ -92,8 +92,8 @@ public class Day05 extends DayTemplate {
 
         int splitAt = rangeAsStr.indexOf("-");
 
-        Long start = Long.parseLong(rangeAsStr.substring(0, splitAt)); 
-        Long end = Long.parseLong(rangeAsStr.substring(splitAt + 1, rangeAsStr.length()));
+        Long start = Long.valueOf(rangeAsStr.substring(0, splitAt)); 
+        Long end = Long.valueOf(rangeAsStr.substring(splitAt + 1, rangeAsStr.length()));
 
         boolean isInRange = (inputNumber >= start) && (inputNumber <= end);
 
